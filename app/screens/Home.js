@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import { Container } from '../components/Container';
+import { Logo } from '../components/Logo';
 
 const Home = () => (
   <Container>
@@ -9,9 +10,7 @@ const Home = () => (
       barStyle="light-content"
     />
 
-    <View>
-      <Text>Home view</Text>
-    </View>
+    <Logo />
   </Container>
 );
 
