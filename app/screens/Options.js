@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, StatusBar, Platform } from 'react-native';
+import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import { ListItem, Separator } from '../components/List';
 
@@ -24,8 +25,12 @@ const linkIcon = (
 );
 
 class Options extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  };
+
   handleThemesPress = () => {
-    console.log('press themes');
+    this.props.navigation.navigate('Themes');
   };
 
   handleSitePress = () => {
