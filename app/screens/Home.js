@@ -22,14 +22,15 @@ class Home extends Component {
     conversionRate: PropTypes.number,
     isFetching: PropTypes.bool,
     lastConvertedDate: PropTypes.object,
+    primaryColor: PropTypes.string,
   };
 
   handlePressBaseCurrency = () => {
-    this.props.navigation.navigate('CurrencyList', { title: 'Base Currency' });
+    this.props.navigation.navigate('CurrencyList', { title: 'Base Currency', type: 'base' });
   };
 
   handlePressQuoteCurrency = () => {
-    this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency' });
+    this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency', type: 'quote' });
   };
 
   handleTextChange = (text) => {
@@ -52,7 +53,7 @@ class Home extends Component {
     }
 
     return (
-      <Container>
+      <Container backgroundColor={this.props.primaryColor}>
         <StatusBar
           translucent={false}
           barStyle='light-content'
@@ -61,12 +62,13 @@ class Home extends Component {
         <Header onPress={this.handleOptionsPress} />
 
         <KeyboardAvoidingView behavior="padding">
-          <Logo />
+          <Logo tintColor={this.props.primaryColor} />
 
           <InputWithButton
             buttonText={this.props.baseCurrency}
             defaultValue={this.props.amount.toString()}
             keyboardType='numeric'
+            textColor={this.props.primaryColor}
             onPress={this.handlePressBaseCurrency}
             onChangeText={this.handleTextChange}
           />
@@ -75,6 +77,7 @@ class Home extends Component {
             buttonText={this.props.quoteCurrency}
             onPress={this.handlePressQuoteCurrency}
             editable={false}
+            textColor={this.props.primaryColor}
             value={quotePrice}
           />
 
@@ -97,6 +100,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   const { baseCurrency, quoteCurrency, amount } = state.currencies;
+  const { primaryColor } = state.theme;
 
   const conversionSelector = state.currencies.conversions[baseCurrency] || {};
   const rates = conversionSelector.rates || {};
@@ -111,6 +115,7 @@ const mapStateToProps = (state) => {
     conversionRate,
     isFetching,
     lastConvertedDate,
+    primaryColor,
   };
 };
 
