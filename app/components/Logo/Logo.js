@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, ImageBackground, Text, Keyboard, Animated, Platform, StyleSheet } from 'react-native';
 import styles from './styles';
 
@@ -11,6 +12,10 @@ class Logo extends Component {
     this.containerImageWidth = new Animated.Value(styles.$largeContainerSize);
     this.imageWidth = new Animated.Value(styles.$largeImageSize);
   }
+
+  static propTypes = {
+    tintColor: PropTypes.string,
+  };
 
   componentDidMount() {
     let showListener = 'keyboardWillShow';
@@ -64,7 +69,8 @@ class Logo extends Component {
 
     const imageStyles = [
       styles.logo,
-      { width: this.imageWidth }
+      { width: this.imageWidth },
+      this.props.tintColor ? { tintColor: this.props.tintColor } : null,
     ];
 
     return (
